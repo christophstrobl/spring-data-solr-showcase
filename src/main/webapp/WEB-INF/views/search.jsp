@@ -34,6 +34,10 @@
 					<c:if test="${fn:length(item.features) > 0}">${item.features[0]} <br /></c:if>
 					<c:if test="${item.price != null}">Price: <fmt:formatNumber value="${item.price}" type="currency"/><br /></c:if>
 					Available: ${item.available?"yes":"no"}<br />
+					<br />
+					<c:forEach var="highlight" items="${page.getHighlights(item) }" varStatus="highlightStatus">
+					${highlight.getSnipplets()}
+					</c:forEach>
 				</div>
 			</c:forEach>
 			<br />

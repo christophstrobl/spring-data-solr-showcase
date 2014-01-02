@@ -27,7 +27,7 @@ import org.springframework.data.solr.showcase.product.model.Product;
 /**
  * @author Christoph Strobl
  */
-interface ProductRepository extends SolrCrudRepository<Product, String> {
+interface ProductRepository extends ProductRepositoryCustom, SolrCrudRepository<Product, String> {
 
 	@Query(fields = { SearchableProductDefinition.ID_FIELD_NAME, SearchableProductDefinition.NAME_FIELD_NAME,
 			SearchableProductDefinition.PRICE_FIELD_NAME, SearchableProductDefinition.FEATURES_FIELD_NAME,

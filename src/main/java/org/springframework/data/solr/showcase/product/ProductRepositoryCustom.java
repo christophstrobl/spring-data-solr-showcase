@@ -15,7 +15,8 @@
  */
 package org.springframework.data.solr.showcase.product;
 
-import org.springframework.data.domain.Page;
+import java.util.Collection;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.query.result.FacetPage;
 import org.springframework.data.solr.showcase.product.model.Product;
@@ -23,14 +24,8 @@ import org.springframework.data.solr.showcase.product.model.Product;
 /**
  * @author Christoph Strobl
  */
-public interface ProductService {
+interface ProductRepositoryCustom {
 
-	int DEFAULT_PAGE_SIZE = 3;
-
-	Page<Product> findByName(String searchTerm, Pageable pageable);
-
-	Product findById(String id);
-
-	FacetPage<Product> autocompleteNameFragment(String fragment, Pageable pageable);
+	FacetPage<Product> findByNameStartsWith(Collection<String> nameFragments, Pageable pagebale);
 
 }

@@ -1,0 +1,129 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.springframework.data</groupId>
+	<artifactId>spring-data-solr-showcase</artifactId>
+	<version>1.0.0.BUILD-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<inceptionYear>2013</inceptionYear>
+	<url>https://github.com/christophstrobl/spring-data-solr-showcase</url>
+	<name>Spring Data Solr Showcase</name>
+	<description>Spring Data Solr - Spring MVC Application Showcase</description>
+	
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.0.1.RELEASE</version>
+	</parent>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+		</dependency>
+		
+		<!-- SOLR -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-solr</artifactId>
+			<version>${spring-data-solr.verion}</version>
+		</dependency>
+		
+		<!-- JSON -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.11</version>
+		</dependency>
+		
+		<!-- WEB -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-jasper</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<properties>
+		<start-class>org.springframework.data.solr.showcase.Application</start-class>
+		<java.version>1.7</java.version>
+		
+		<!--  -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<junit.version>4.10</junit.version>
+		<spring-data-solr.verion>1.1.0.RELEASE</spring-data-solr.verion>
+		<org.springframework.version>4.0.2.RELEASE</org.springframework.version>
+		<springhateoas>0.9.0.RELEASE</springhateoas>
+		<servlet-api.version>3.0.1</servlet-api.version>
+	</properties>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>
+        Copyright 2010 the original author or authors.
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+        implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+      </comments>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>https://github.com/christophstrobl/spring-data-solr-showcase</url>
+		<connection>scm:git:git://github.com/christophstrobl/spring-data-solr-showcase.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:christophstrobl/spring-data-solr-showcase.git</developerConnection>
+	</scm>
+	
+
+	<developers>
+		<developer>
+			<id>christophstrobl</id>
+			<name>Christoph Strobl</name>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
+
+	<repositories>
+		<repository>
+			<id>spring-snapshots</id>
+			<url>http://repo.springsource.org/libs-snapshot</url>
+		</repository>
+		<repository>
+			<id>spring-releases</id>
+			<url>http://repo.springsource.org/libs-release</url>
+		</repository>
+	</repositories>
+
+</project>  

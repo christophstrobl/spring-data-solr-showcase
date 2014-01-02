@@ -20,6 +20,8 @@ import java.util.Collection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.solr.core.query.Query.Operator;
+import org.springframework.data.solr.core.query.result.FacetPage;
+import org.springframework.data.solr.repository.Facet;
 import org.springframework.data.solr.repository.Query;
 import org.springframework.data.solr.repository.SolrCrudRepository;
 import org.springframework.data.solr.showcase.product.model.Product;
@@ -27,11 +29,14 @@ import org.springframework.data.solr.showcase.product.model.Product;
 /**
  * @author Christoph Strobl
  */
-interface ProductRepository extends ProductRepositoryCustom, SolrCrudRepository<Product, String> {
+interface ProductRepository extends SolrCrudRepository<Product, String> {
 
 	@Query(fields = { SearchableProductDefinition.ID_FIELD_NAME, SearchableProductDefinition.NAME_FIELD_NAME,
 			SearchableProductDefinition.PRICE_FIELD_NAME, SearchableProductDefinition.FEATURES_FIELD_NAME,
 			SearchableProductDefinition.AVAILABLE_FIELD_NAME }, defaultOperator = Operator.AND)
 	Page<Product> findByNameIn(Collection<String> names, Pageable page);
+
+	@Facet(fields = { SearchableProductDefinition.NAME_FIELD_NAME })
+	FacetPage<Product> findByNameStartsWith(Collection<String> nameFragments, Pageable pagebale);
 
 }

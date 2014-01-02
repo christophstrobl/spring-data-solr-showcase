@@ -17,6 +17,7 @@ package org.springframework.data.solr.showcase.product;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -24,6 +25,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.solr.core.query.result.FacetPage;
+import org.springframework.data.solr.core.query.result.SolrResultPage;
 import org.springframework.data.solr.showcase.product.model.Product;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +52,14 @@ class ProductServiceImpl implements ProductService {
 	@Override
 	public Product findById(String id) {
 		return productRepository.findOne(id);
+	}
+
+	@Override
+	public FacetPage<Product> autocompleteNameFragment(String fragment, Pageable pageable) {
+		if (StringUtils.isBlank(fragment)) {
+			return new SolrResultPage<Product>(Collections.<Product> emptyList());
+		}
+		return productRepository.findByNameStartsWith(splitSearchTermAndRemoveIgnoredCharacters(fragment), pageable);
 	}
 
 	private Collection<String> splitSearchTermAndRemoveIgnoredCharacters(String searchTerm) {

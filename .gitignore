@@ -1,0 +1,10 @@
+target/
+.settings/
+.project
+.classpath
+.springBeans
+.sonar4clipse
+*.sonar4clipseExternals
+.idea
+spring-data-solr.iml
+.DS_Store

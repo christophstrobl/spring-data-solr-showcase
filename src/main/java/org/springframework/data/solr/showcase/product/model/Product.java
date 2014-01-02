@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.solr.core.geo.GeoLocation;
 import org.springframework.data.solr.core.mapping.SolrDocument;
 import org.springframework.data.solr.showcase.product.SearchableProductDefinition;
 
@@ -51,7 +52,7 @@ public class Product implements SearchableProductDefinition {
 	private Integer popularity;
 
 	@Field(LOCATION_FIELD_NAME)
-	private String location;
+	private GeoLocation location;
 
 	public String getId() {
 		return id;
@@ -109,11 +110,11 @@ public class Product implements SearchableProductDefinition {
 		this.popularity = popularity;
 	}
 
-	public String getLocation() {
+	public GeoLocation getLocation() {
 		return location;
 	}
 
-	public void setLocation(String location) {
+	public void setLocation(GeoLocation location) {
 		this.location = location;
 	}
 

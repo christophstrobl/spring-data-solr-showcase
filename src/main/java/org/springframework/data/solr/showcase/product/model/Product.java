@@ -20,11 +20,13 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.solr.core.geo.GeoLocation;
 import org.springframework.data.solr.core.mapping.Indexed;
+import org.springframework.data.solr.core.mapping.SolrDocument;
 import org.springframework.data.solr.showcase.product.SearchableProductDefinition;
 
 /**
  * @author Christoph Strobl
  */
+@SolrDocument(solrCoreName = "collection1")
 public class Product implements SearchableProductDefinition {
 
 	private @Id @Indexed String id;

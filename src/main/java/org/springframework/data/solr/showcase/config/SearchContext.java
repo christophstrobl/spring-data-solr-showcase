@@ -20,31 +20,18 @@ import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.repository.config.EnableSolrRepositories;
-import org.springframework.data.solr.server.SolrServerFactory;
-import org.springframework.data.solr.server.support.MulticoreSolrServerFactory;
 
 /**
  * @author Christoph Strobl
  */
 @Configuration
-@EnableSolrRepositories(basePackages = { "org.springframework.data.solr.showcase.product" })
+@EnableSolrRepositories(basePackages = { "org.springframework.data.solr.showcase.product" }, multicoreSupport = true)
 public class SearchContext {
 
 	@Bean
 	public SolrServer solrServer(@Value("${solr.host}") String solrHost) {
 		return new HttpSolrServer(solrHost);
-	}
-
-	@Bean
-	public SolrServerFactory solrServerFactory(SolrServer solrServer) {
-		return new MulticoreSolrServerFactory(solrServer);
-	}
-
-	@Bean
-	public SolrTemplate solrTemplate(SolrServerFactory solrServerFactory) {
-		return new SolrTemplate(solrServerFactory);
 	}
 
 }

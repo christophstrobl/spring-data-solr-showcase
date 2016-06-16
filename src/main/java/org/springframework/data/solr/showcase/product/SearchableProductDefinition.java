@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2014 the original author or authors.
+ * Copyright 2012 - 2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ package org.springframework.data.solr.showcase.product;
  * @author Christoph Strobl
  */
 public interface SearchableProductDefinition {
+
+	String COLLECTION_NAME = "collection1";
 
 	String ID_FIELD_NAME = "id";
 	String NAME_FIELD_NAME = "name";

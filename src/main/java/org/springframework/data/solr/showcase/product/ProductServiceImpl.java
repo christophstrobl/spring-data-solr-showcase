@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2014 the original author or authors.
+ * Copyright 2012 - 2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,11 @@
  */
 package org.springframework.data.solr.showcase.product;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +39,11 @@ class ProductServiceImpl implements ProductService {
 	private static final Pattern IGNORED_CHARS_PATTERN = Pattern.compile("\\p{Punct}");
 
 	private ProductRepository productRepository;
+
+	@Autowired
+	ProductServiceImpl(ProductRepository productRepository) {
+		this.productRepository = productRepository;
+	}
 
 	@Override
 	public Page<Product> findByName(String searchTerm, Pageable pageable) {
@@ -63,19 +68,11 @@ class ProductServiceImpl implements ProductService {
 	}
 
 	private Collection<String> splitSearchTermAndRemoveIgnoredCharacters(String searchTerm) {
-		String[] searchTerms = StringUtils.split(searchTerm, " ");
-		List<String> result = new ArrayList<String>(searchTerms.length);
-		for (String term : searchTerms) {
-			if (StringUtils.isNotEmpty(term)) {
-				result.add(IGNORED_CHARS_PATTERN.matcher(term).replaceAll(" "));
-			}
-		}
-		return result;
-	}
 
-	@Autowired
-	public void setProductRepository(ProductRepository productRepository) {
-		this.productRepository = productRepository;
+		return Arrays.asList(StringUtils.split(searchTerm, " ")).stream() //
+				.filter(org.springframework.util.StringUtils::hasText) //
+				.map(entry -> {
+					return IGNORED_CHARS_PATTERN.matcher(entry).replaceAll(" ");
+				}).collect(Collectors.toList());
 	}
-
 }

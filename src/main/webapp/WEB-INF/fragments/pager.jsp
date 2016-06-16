@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<c:if test="${page.hasPreviousPage()}">
+<c:if test="${page.hasPrevious()}">
 	<spring:url value="" var="prev">
 		<spring:param name="q" value="${query}" />
 		<spring:param name="page" value="${page.number - 1}"></spring:param>
@@ -25,7 +25,7 @@
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
-<c:if test="${page.hasNextPage()}">
+<c:if test="${page.hasNext()}">
 	<spring:url value="" var="next">
 		<spring:param name="q" value="${query}" />
 		<spring:param name="page" value="${page.number + 1}"></spring:param>

@@ -43,7 +43,7 @@
 			<h3>Store</h3>
 			<div>
 				<p>
-					<img ismap="ismap" height="220" src="http://maps.googleapis.com/maps/api/staticmap?markers=color:green|${product.location.latitude},${product.location.longitude}&zoom=12&size=200x200&sensor=false" />
+					<img ismap="ismap" height="220" src="http://maps.googleapis.com/maps/api/staticmap?markers=color:green|${product.location.x},${product.location.y}&zoom=12&size=200x200&sensor=false" />
 				</p>
 			</div>
 		</c:if>

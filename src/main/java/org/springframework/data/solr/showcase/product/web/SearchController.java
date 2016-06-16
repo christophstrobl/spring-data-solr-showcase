@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 - 2013 the original author or authors.
+ * Copyright 2012 - 2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,9 +48,15 @@ public class SearchController {
 
 	private ProductService productService;
 
+	@Autowired
+	public SearchController(ProductService productService) {
+		this.productService = productService;
+	}
+
 	@RequestMapping("/search")
-	public String search(Model model, @RequestParam(value = "q", required = false) String query, @PageableDefault(
-			page = 0, size = ProductService.DEFAULT_PAGE_SIZE) Pageable pageable, HttpServletRequest request) {
+	public String search(Model model, @RequestParam(value = "q", required = false) String query,
+			@PageableDefault(page = 0, size = ProductService.DEFAULT_PAGE_SIZE) Pageable pageable,
+			HttpServletRequest request) {
 
 		model.addAttribute("page", productService.findByName(query, pageable));
 		model.addAttribute("pageable", pageable);
@@ -69,6 +75,7 @@ public class SearchController {
 		FacetPage<Product> result = productService.autocompleteNameFragment(query, pageable);
 
 		Set<String> titles = new LinkedHashSet<String>();
+
 		for (Page<FacetFieldEntry> page : result.getFacetResultPages()) {
 			for (FacetFieldEntry entry : page) {
 				if (entry.getValue().contains(query)) { // we have to do this as we do not use terms vector or a string field
@@ -78,10 +85,4 @@ public class SearchController {
 		}
 		return titles;
 	}
-
-	@Autowired
-	public void setProductService(ProductService productService) {
-		this.productService = productService;
-	}
-
 }

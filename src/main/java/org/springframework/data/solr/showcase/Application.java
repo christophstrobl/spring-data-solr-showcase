@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 the original author or authors.
+ * Copyright 2014-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,25 +15,43 @@
  */
 package org.springframework.data.solr.showcase;
 
+import java.util.List;
+
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.data.solr.showcase.config.SearchContext;
-import org.springframework.data.solr.showcase.config.WebContext;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * @author Christoph Strobl
  */
-@Configuration
-@ComponentScan
-@EnableAutoConfiguration
-@Import({ WebContext.class, SearchContext.class })
+@SpringBootApplication
 public class Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
+	}
+
+	@Bean
+	public WebMvcConfigurerAdapter mvcViewConfigurer() {
+
+		return new WebMvcConfigurerAdapter() {
+
+			@Override
+			public void addViewControllers(ViewControllerRegistry registry) {
+
+				registry.addViewController("/").setViewName("search");
+				registry.addViewController("/monitor").setViewName("monitor");
+			}
+
+			@Override
+			public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+				argumentResolvers.add(new PageableHandlerMethodArgumentResolver());
+			}
+		};
 	}
 
 }

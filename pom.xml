@@ -118,11 +118,11 @@
 	<repositories>
 		<repository>
 			<id>spring-snapshots</id>
-			<url>http://repo.springsource.org/libs-snapshot</url>
+			<url>https://repo.springsource.org/libs-snapshot</url>
 		</repository>
 		<repository>
 			<id>spring-releases</id>
-			<url>http://repo.springsource.org/libs-release</url>
+			<url>https://repo.springsource.org/libs-release</url>
 		</repository>
 	</repositories>
 
